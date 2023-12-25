@@ -24,8 +24,7 @@ public class PlayerServiceImp implements PlayerService{
         }
 
        @Override
-       public Player GetPlayer(long PlayerId) {
-           return playerRepository.findById(PlayerId).orElse(null);
+       public Player GetPlayer(long PlayerId) {return playerRepository.findById(PlayerId).orElse(null);
        }
 
     @Override
