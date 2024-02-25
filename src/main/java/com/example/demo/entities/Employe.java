@@ -19,6 +19,8 @@ public class Employe implements Serializable {
 
     private String title;
 
+    private String fileName;
+
     private long empNum;
 
     @ManyToOne

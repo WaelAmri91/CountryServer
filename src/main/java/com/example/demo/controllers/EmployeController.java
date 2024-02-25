@@ -4,8 +4,12 @@ import com.example.demo.Dto.AddEmployeRequest;
 import com.example.demo.entities.Employe;
 import com.example.demo.services.EmployeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.function.EntityResponse;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -37,5 +41,20 @@ public class EmployeController {
             public void DeleteEmploye(@PathVariable("idEmploye") Long idEmploye ){
                  employeService.DeleteEmploye(idEmploye);
             }
+    @PostMapping("/AddEmployeFile/{idEmploye}")
+    public ResponseEntity<Employe> AddEmployeFile(@RequestParam("file") MultipartFile multipartFile,
+                                                 @PathVariable("idEmploye") Long idEmploye
+                                 )
+    {
+        Employe messsage = employeService.addFile(multipartFile,idEmploye);
+        return ResponseEntity.ok().body(messsage);
+    }
+
+    @GetMapping("/retrieveFile/{idEmploye}")
+
+    public ResponseEntity<byte[]> retrieveFile(@PathVariable("idEmploye") Long idEmploye) throws IOException {
+        return employeService.retrieveFile(idEmploye);
+    }
+
 
 }
